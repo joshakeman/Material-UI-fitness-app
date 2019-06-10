@@ -17,40 +17,56 @@ function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
   }
 
-export default ({ exercises }) => 
+export default ({ 
+    exercises, 
+    category, 
+    onSelect, 
+    exercise: {
+        id, 
+        title = 'Welcome!', 
+        description = 'Please select an exercise from the list on the left.'
+    } 
+}) => 
     <Grid container spacing={2}>
         <Grid item sm>
             <Paper style={styles.Paper}>
-                {exercises.map(([group, exercises]) => 
-                    <div>
+                {exercises.map(([group, exercises]) =>
+                    !category || category === group
+                    ? <div key={group}>
                         <Typography variant="headline" style={{textTransform: 'capitalize'}}>
                             {group}
                         </Typography>
                         <List component="ul" aria-label="Secondary mailbox folders">
-                            {exercises.map(({ title }) =>
-                                <ListItem button>
+                            {exercises.map(({ id, title }) =>
+                                <ListItem 
+                                    key={id}
+                                    button
+                                    onClick={()=> onSelect(id)}
+                                >
                                     <ListItemText primary={title} />
                                 </ListItem>
                                 )}
                         </List>
                     </div>
+                    : null 
                     )}
             </Paper>
         </Grid>
 
         <Grid item sm>
             <Paper style={styles.Paper}>
+                
                 <Typography
                 variant="h2"
                 >
-                    Welcome!
+                    {title}
                 </Typography>
 
                 <Typography
                 variant="subheading"
                 style={{marginTop: 20}}
                 >
-                    Please select an exercise from the list on the left
+                    {description}
                 </Typography>
             </Paper>        
         </Grid>
