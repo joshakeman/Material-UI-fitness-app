@@ -10,8 +10,9 @@ class App extends React.Component {
         <Header />
 
         <Exercises />
-        
+
         <Footer />
+        
       </div>
     );
   } 

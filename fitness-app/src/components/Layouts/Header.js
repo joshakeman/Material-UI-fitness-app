@@ -12,7 +12,9 @@ const Header = props => {
     <div>
         <AppBar position="static">
             <Toolbar>
-               
+            <Typography variant="headline" color="inherit">
+                Exercise Database
+            </Typography>
             </Toolbar>
         </AppBar>        
     </div>
