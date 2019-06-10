@@ -4,19 +4,27 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-const Footer = props => {
+const Footer = ({ muscles, category, onSelect }) => {
+    const index = category
+        ? muscles.findIndex(group => group === category) + 1
+        : 0
+
+        const onIndexSelect = (e, index) => 
+            onSelect(index === 0 ? '' : muscles[index - 1]) 
+
     return (
     <Paper >
         <Tabs
-            value={1}
-            // onChange={handleChange}
+            value={index}
+            onChange={onIndexSelect}
             indicatorColor="primary"
             textColor="primary"
             centered
         >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
+            <Tab label="All" />
+            {muscles.map(m =>
+                <Tab label={m} />
+            )}
         </Tabs>
     </Paper>
     )
