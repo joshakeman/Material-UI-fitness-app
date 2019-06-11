@@ -11,27 +11,49 @@ class App extends React.Component {
   }
 
   getExercisesByMuscles() {
+
+    const initialExercises = muscles.reduce((exercises, category) => ({
+      ...exercises,
+      [category]: []
+    }), {})
+
+    console.log(muscles, initialExercises)
+
     return Object.entries(this.state.exercises.reduce((exercises, exercise) => {
       const { muscles } = exercise
 
-      exercises[muscles] = exercises[muscles]
-        ? [...exercises[muscles], exercise]
-        : [exercise]
+      exercises[muscles] = [...exercises[muscles], exercise]
 
         return exercises
-    }, {})
+    }, initialExercises)
     )
   }
 
-  handleCategorySelected = category => {
+  handleCategorySelect = category => {
     this.setState ({
       category
     })
   }
 
-  handleExerciseSelected = id => {
+  handleExerciseSelect = id => {
     this.setState (({ exercises }) => ({
       exercise: exercises.find(ex => ex.id === id)
+    }))
+  }
+
+  handleExerciseCreate = exercise => {
+    this.setState(({ exercises }) => ({
+      exercises: [
+        ...exercises,
+        exercise
+      ]
+      
+    }))
+  }
+
+  handleExerciseDelete = id => {
+    this.setState(( { exercises })=> ({
+      exercises: exercises.filter(ex => ex.id !== id)
     }))
   }
 
@@ -42,19 +64,23 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header />
+        <Header 
+        muscles={muscles}
+        onExerciseCreate={this.handleExerciseCreate}
+        />
 
         <Exercises
           exercise={exercise}
           category={category}
           exercises={exercises}
-          onSelect={this.handleExerciseSelected}
+          onSelect={this.handleExerciseSelect}
+          onDelete={this.handleExerciseDelete}
         />
 
         <Footer 
           category={category}
           muscles={muscles}
-          onSelect={this.handleCategorySelected}
+          onSelect={this.handleCategorySelect}
         />
 
       </div>
