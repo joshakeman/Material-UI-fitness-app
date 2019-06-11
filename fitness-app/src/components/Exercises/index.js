@@ -4,8 +4,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
-import { Delete } from '@material-ui/icons'
-
+import { Delete, Edit } from '@material-ui/icons'
+import Form from './Form'
 
 const styles = {
     Paper: { 
@@ -24,13 +24,18 @@ function ListItemLink(props) {
 export default ({ 
     exercises, 
     category, 
-    onSelect, 
+    onSelect,
+    muscles,
+    exercise,
+    editMode, 
     exercise: {
         id, 
         title = 'Welcome!', 
         description = 'Please select an exercise from the list on the left.'
     },
-    onDelete
+    onDelete,
+    onSelectEdit,
+    onEdit
 }) => 
     <Grid container spacing={2}>
         <Grid item sm>
@@ -50,6 +55,9 @@ export default ({
                                 >
                                     <ListItemText primary={title} />
                                     <ListItemSecondaryAction>
+                                        <IconButton onClick={() => onSelectEdit(id)}>
+                                            <Edit />
+                                        </IconButton>
                                         <IconButton onClick={() => onDelete(id)}>
                                             <Delete />
                                         </IconButton>
@@ -65,7 +73,13 @@ export default ({
 
         <Grid item sm>
             <Paper style={styles.Paper}>
-                
+                {editMode
+                ? <Form
+                exercise={exercise} 
+                muscles={muscles}
+                onSubmit={onEdit}
+                />
+                : <>
                 <Typography
                 variant="h2"
                 >
@@ -78,6 +92,7 @@ export default ({
                 >
                     {description}
                 </Typography>
+                </>}
             </Paper>        
         </Grid>
 

@@ -30,38 +30,53 @@ class App extends React.Component {
   }
   //
 
-  handleCategorySelect = category => {
+  handleCategorySelect = category => 
     this.setState ({
       category
     })
-  }
+  
 
-  handleExerciseSelect = id => {
+  handleExerciseSelect = id => 
     this.setState (({ exercises }) => ({
       exercise: exercises.find(ex => ex.id === id)
     }))
-  }
+  
 
-  handleExerciseCreate = exercise => {
+  handleExerciseCreate = exercise => 
     this.setState(({ exercises }) => ({
       exercises: [
         ...exercises,
         exercise
-      ]
-      
+      ]     
     }))
-  }
+  
 
-  handleExerciseDelete = id => {
+  handleExerciseDelete = id => 
     this.setState(( { exercises })=> ({
       exercises: exercises.filter(ex => ex.id !== id)
     }))
-  }
+  
+
+  handleExerciseSelectEdit = id => 
+    this.setState (({ exercises }) => ({
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: true
+    }))
+
+  handleExerciseEdit = exercise => 
+    this.setState(({ exercises }) => ({
+      exercises: [
+        ...exercises.filter(ex => ex.id !== exercise.id),
+        exercise
+      ]
+    }))
+  
+  
 
   render() {
 
     const exercises = this.getExercisesByMuscles(),
-    { category, exercise } = this.state
+    { category, exercise, editMode } = this.state
 
     return (
       <div>
@@ -76,6 +91,10 @@ class App extends React.Component {
           exercises={exercises}
           onSelect={this.handleExerciseSelect}
           onDelete={this.handleExerciseDelete}
+          onSelectEdit={this.handleExerciseSelectEdit}
+          editMode={editMode}
+          muscles={muscles}
+          onEdit={this.handleExerciseEdit}
         />
 
         <Footer 
