@@ -28,6 +28,7 @@ class App extends React.Component {
     }, initialExercises)
     )
   }
+  //
 
   handleCategorySelect = category => {
     this.setState ({
