@@ -32,27 +32,25 @@ export default withStyles(useStyles)(class extends React.Component {
         }
     }
 
+    componentWillReceiveProps({ exercise }) {
+        this.setState({
+            ...exercise
+        })
+    }
+
     handleChange = name => ({ target: { value }}) => 
         this.setState({
             [name]: value
         })
 
       handleSubmit = () => {
-          const { exercise } = this.state
 
           this.props.onSubmit({
-              ...exercise,
-              id: exercise.title.toLowerCase().replace(/ /g, '-')
+            id: this.state.title.toLowerCase().replace(/ /g, '-'),
+              ...this.state
           })
 
-          this.setState({
-              open: false,
-              exercise: {
-                  title: '',
-                  description: '',
-                  muscles: ''
-              }
-          })
+          this.setState(this.getInitState())
       }
 
     render() {
@@ -97,7 +95,7 @@ export default withStyles(useStyles)(class extends React.Component {
                 variant="contained"
                 onClick={this.handleSubmit}
                 >
-                    Create
+                {this.props.exercise ? 'Edit' : 'Create'}
             </Button>
             </form>
     }

@@ -28,7 +28,6 @@ class App extends React.Component {
     }, initialExercises)
     )
   }
-  //
 
   handleCategorySelect = category => 
     this.setState ({
@@ -38,7 +37,8 @@ class App extends React.Component {
 
   handleExerciseSelect = id => 
     this.setState (({ exercises }) => ({
-      exercise: exercises.find(ex => ex.id === id)
+      exercise: exercises.find(ex => ex.id === id),
+      editMode: false
     }))
   
 
@@ -53,7 +53,9 @@ class App extends React.Component {
 
   handleExerciseDelete = id => 
     this.setState(( { exercises })=> ({
-      exercises: exercises.filter(ex => ex.id !== id)
+      exercises: exercises.filter(ex => ex.id !== id),
+      editMode: false,
+      exercise: {}
     }))
   
 
@@ -68,7 +70,8 @@ class App extends React.Component {
       exercises: [
         ...exercises.filter(ex => ex.id !== exercise.id),
         exercise
-      ]
+      ],
+      exercise
     }))
   
   
