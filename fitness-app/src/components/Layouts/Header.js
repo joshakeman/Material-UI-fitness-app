@@ -13,13 +13,20 @@ import CreateDialog from '../Exercises/Dialog'
 const styles = {
     flex : {
         flex: 1
+    },
+    padded: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingRight: 20,
+        paddingLeft: 20,
+
     }
 }
 
 const Header = ({ classes, muscles, onExerciseCreate }) => {
     return (
     <div>
-        <AppBar position="static">
+        <AppBar className={classes.padded} position="static">
             <Toolbar>
             <Typography variant="h5" color="inherit" className={classes.flex}>
                 Exercise Database

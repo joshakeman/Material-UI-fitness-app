@@ -83,7 +83,7 @@ class App extends React.Component {
     { category, exercise, editMode } = this.state
 
     return (
-      <div>
+      <>
         <CssBaseline />
         <Header 
         muscles={muscles}
@@ -108,7 +108,7 @@ class App extends React.Component {
           onSelect={this.handleCategorySelect}
         />
 
-      </div>
+      </>
     );
   } 
 }
