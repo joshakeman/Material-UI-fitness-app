@@ -41,7 +41,10 @@ export default class extends React.Component {
               { muscles } = this.props
 
         return <>
-        <Fab  onClick={this.handleToggle}>
+        <Fab  
+        onClick={this.handleToggle} 
+        color='secondary'
+        >
             <AddIcon />
         </Fab>
     <Dialog 

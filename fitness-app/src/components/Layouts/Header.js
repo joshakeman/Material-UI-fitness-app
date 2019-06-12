@@ -6,15 +6,22 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { withStyles } from '@material-ui/core/styles';
 
 import CreateDialog from '../Exercises/Dialog'
 
-const Header = ({ muscles, onExerciseCreate }) => {
+const styles = {
+    flex : {
+        flex: 1
+    }
+}
+
+const Header = ({ classes, muscles, onExerciseCreate }) => {
     return (
     <div>
         <AppBar position="static">
             <Toolbar>
-            <Typography variant="h5" color="inherit" style={{flex: 1}}>
+            <Typography variant="h5" color="inherit" className={classes.flex}>
                 Exercise Database
             </Typography>
 
@@ -28,4 +35,4 @@ const Header = ({ muscles, onExerciseCreate }) => {
     )
 }
 
-export default Header
+export default withStyles(styles)(Header)

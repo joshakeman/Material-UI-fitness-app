@@ -45,7 +45,10 @@ export default withStyles(styles)(
                 {exercises.map(([group, exercises]) =>
                     !category || category === group
                     ? <div key={group}>
-                        <Typography variant="h4" style={{textTransform: 'capitalize'}}>
+                        <Typography 
+                        color='secondary'
+                        variant="h4" 
+                        style={{textTransform: 'capitalize'}}>
                             {group}
                         </Typography>
                         <List component="ul" aria-label="Secondary mailbox folders">
@@ -57,10 +60,10 @@ export default withStyles(styles)(
                                 >
                                     <ListItemText primary={title} />
                                     <ListItemSecondaryAction>
-                                        <IconButton onClick={() => onSelectEdit(id)}>
+                                        <IconButton color='primary' onClick={() => onSelectEdit(id)}>
                                             <Edit />
                                         </IconButton>
-                                        <IconButton onClick={() => onDelete(id)}>
+                                        <IconButton color='primary' onClick={() => onDelete(id)}>
                                             <Delete />
                                         </IconButton>
                                     </ListItemSecondaryAction>
@@ -78,6 +81,7 @@ export default withStyles(styles)(
                 <Typography
                     variant="h2"
                     gutterBottom
+                    color='secondary'
                     >
                         {title}
                 </Typography>
