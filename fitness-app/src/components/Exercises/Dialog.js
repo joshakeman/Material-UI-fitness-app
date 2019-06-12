@@ -46,7 +46,9 @@ export default class extends React.Component {
         </Fab>
     <Dialog 
     open={open} 
-    onClose={this.handleToggle} 
+    onClose={this.handleToggle}
+    fullWidth
+    maxWidth='xs'
     >
         <DialogTitle>
             Create a new exercise

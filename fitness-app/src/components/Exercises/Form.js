@@ -3,22 +3,12 @@ import React from 'react'
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
 
-
-const useStyles = theme => ({
-
-    formControl: {
-      width: 250
-    },
-    
-  });
-
-export default withStyles(useStyles)(class extends React.Component {
+export default class extends React.Component {
 
     state = this.getInitState()
 
@@ -32,11 +22,7 @@ export default withStyles(useStyles)(class extends React.Component {
         }
     }
 
-    componentWillReceiveProps({ exercise }) {
-        this.setState({
-            ...exercise
-        })
-    }
+
 
     handleChange = name => ({ target: { value }}) => 
         this.setState({
@@ -50,12 +36,11 @@ export default withStyles(useStyles)(class extends React.Component {
               ...this.state
           })
 
-          this.setState(this.getInitState())
       }
 
     render() {
         const { title, description, muscles } = this.state,
-              { classes, muscles : categories } = this.props
+              {  muscles : categories } = this.props
 
         return <form>
             <TextField
@@ -63,10 +48,10 @@ export default withStyles(useStyles)(class extends React.Component {
                 value={title}
                 onChange={this.handleChange('title')}
                 margin="normal"
-                className={classes.formControl}
+                fullWidth
             /> <br></br>
             <FormControl
-                className={classes.formControl}
+                fullWidth
             >
                 <InputLabel htmlFor="muscles">Muscles</InputLabel>
                 <Select
@@ -88,16 +73,16 @@ export default withStyles(useStyles)(class extends React.Component {
                 margin="normal"
                 multiline
                 rows="4"
-                className={classes.formControl}
+                fullWidth
             /><br></br>
             <Button 
                 color="primary" 
                 variant="contained"
                 onClick={this.handleSubmit}
+                disabled={!title || !muscles}
                 >
                 {this.props.exercise ? 'Edit' : 'Create'}
             </Button>
             </form>
     }
 }
-)
