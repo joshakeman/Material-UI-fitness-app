@@ -13,9 +13,9 @@ import Button from '@material-ui/core/Button';
 const useStyles = theme => ({
 
     formControl: {
-      width: 300
+      width: 250
     },
-
+    
   });
 
 export default withStyles(useStyles)(class extends React.Component {

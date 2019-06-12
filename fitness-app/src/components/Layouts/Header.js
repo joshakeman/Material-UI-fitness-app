@@ -14,7 +14,7 @@ const Header = ({ muscles, onExerciseCreate }) => {
     <div>
         <AppBar position="static">
             <Toolbar>
-            <Typography variant="headline" color="inherit" style={{flex: 1}}>
+            <Typography variant="h5" color="inherit" style={{flex: 1}}>
                 Exercise Database
             </Typography>
 

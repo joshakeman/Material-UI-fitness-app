@@ -6,22 +6,24 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import { Delete, Edit } from '@material-ui/icons'
 import Form from './Form'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-const styles = {
+const styles = theme => ({
     Paper: { 
         padding: 20, 
-        marginTop: 10, 
-        marginBottom: 10, 
+        marginTop: 5, 
         height: 500, 
         overflowY: 'auto' 
     }
-}
+})
 
 function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
   }
 
-export default ({ 
+export default withStyles(styles)(
+    ({ 
+    classes,
     exercises, 
     category, 
     onSelect,
@@ -38,12 +40,12 @@ export default ({
     onEdit
 }) => 
     <Grid container spacing={2}>
-        <Grid item sm>
-            <Paper style={styles.Paper}>
+        <Grid item xs={12} sm={6}>
+            <Paper className={classes.Paper}>
                 {exercises.map(([group, exercises]) =>
                     !category || category === group
                     ? <div key={group}>
-                        <Typography variant="headline" style={{textTransform: 'capitalize'}}>
+                        <Typography variant="h4" style={{textTransform: 'capitalize'}}>
                             {group}
                         </Typography>
                         <List component="ul" aria-label="Secondary mailbox folders">
@@ -71,8 +73,8 @@ export default ({
             </Paper>
         </Grid>
 
-        <Grid item sm>
-            <Paper style={styles.Paper}>
+        <Grid item xs={12} sm={6}>
+            <Paper className={classes.Paper}>
                 {editMode
                 ? <Form
                 exercise={exercise} 
@@ -87,7 +89,7 @@ export default ({
                 </Typography>
 
                 <Typography
-                variant="subheading"
+                variant="subtitle1"
                 style={{marginTop: 20}}
                 >
                     {description}
@@ -97,3 +99,4 @@ export default ({
         </Grid>
 
     </Grid>
+)
