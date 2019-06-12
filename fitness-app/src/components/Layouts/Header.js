@@ -23,7 +23,7 @@ const styles = {
     }
 }
 
-const Header = ({ classes, muscles, onExerciseCreate }) => {
+const Header = ({ classes }) => {
     return (
     <div>
         <AppBar className={classes.padded} position="static">
@@ -32,10 +32,7 @@ const Header = ({ classes, muscles, onExerciseCreate }) => {
                 Exercise Database
             </Typography>
 
-            <CreateDialog 
-            muscles={muscles} 
-            onCreate={onExerciseCreate}
-            />
+            <CreateDialog />
             </Toolbar>
         </AppBar>        
     </div>

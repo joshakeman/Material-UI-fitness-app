@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Delete, Edit } from '@material-ui/icons'
 import Form from './Form'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withContext } from '../../context'
 
 const styles = theme => ({
     paper: { 
@@ -44,10 +45,10 @@ function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
   }
 
-export default withStyles(styles)(
+const Exercises = 
     ({ 
     classes,
-    exercises, 
+    exercisesByMuscles, 
     category, 
     onSelect,
     muscles,
@@ -65,7 +66,7 @@ export default withStyles(styles)(
     <Grid container spacing={2} className={classes.container}>
         <Grid item className={classes.item} xs={12} sm={6}>
             <Paper className={classes.paper}>
-                {exercises.map(([group, exercises]) =>
+                {exercisesByMuscles.map(([group, exercises]) =>
                     !category || category === group
                     ? <div key={group}>
                         <Typography 
@@ -125,4 +126,5 @@ export default withStyles(styles)(
         </Grid>
 
     </Grid>
-)
+
+export default withContext(withStyles(styles)(Exercises))

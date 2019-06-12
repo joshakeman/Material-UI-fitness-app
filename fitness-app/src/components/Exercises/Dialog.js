@@ -13,10 +13,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withContext } from '../../context'
 
 import Form from './Form'
 
-export default class extends React.Component {
+class CreateDialog extends React.Component {
 
     state = {
         open: false,
@@ -38,41 +39,43 @@ export default class extends React.Component {
     render() {
 
         const { open } = this.state,
-              { muscles } = this.props
+             { muscles } = this.props
 
-        return <>
-        <Fab  
-        onClick={this.handleToggle} 
-        color='secondary'
-        >
-            <AddIcon />
-        </Fab>
-    <Dialog 
-    open={open} 
-    onClose={this.handleToggle}
-    fullWidth
-    maxWidth='xs'
-    >
-        <DialogTitle>
-            Create a new exercise
-        </DialogTitle>
-        <DialogContent>
-            <DialogContentText>
-                Please fill out the form
-            </DialogContentText>
-            <Form 
-                muscles={muscles}
-                onSubmit={this.handleFormSubmit}
-            />
+        return (
+        <>
+                <Fab  
+                onClick={this.handleToggle} 
+                color='secondary'
+                >
+                    <AddIcon />
+                </Fab>
+                <Dialog 
+                open={open} 
+                onClose={this.handleToggle}
+                fullWidth
+                maxWidth='xs'
+                >
+                    <DialogTitle>
+                        Create a new exercise
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Please fill out the form
+                        </DialogContentText>
+                        <Form 
+                            muscles={muscles}
+                            onSubmit={this.handleFormSubmit}
+                        />
 
-        </DialogContent>
+                    </DialogContent>
 
-        <DialogActions>
- 
-        </DialogActions>
-    </Dialog>
-
-</>
+                    <DialogActions>
+            
+                    </DialogActions>
+                </Dialog>
+            </>
+)
     }
 }
 
+export default withContext(CreateDialog)
